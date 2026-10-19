@@ -1,27 +1,21 @@
 import asyncio
 import logging
-import sys
 
-from aiogram import Bot
+from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 
-from bot.config import load_config
-from bot.dispatcher import dp
-from bot import handlers  # noqa: F401,E402  import registers handlers on dp
+from bot.config import BOT_TOKEN
+from bot.handlers import router
 
 
-async def main() -> None:
-    config = load_config()
-    bot = Bot(
-        token=config.bot_token,
-        default=DefaultBotProperties(parse_mode=ParseMode.HTML),
-    )
-
-    await bot.delete_webhook(drop_pending_updates=True)
+async def main():
+    bot = Bot(BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+    dp = Dispatcher()
+    dp.include_router(router)
     await dp.start_polling(bot)
 
 
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     asyncio.run(main())
