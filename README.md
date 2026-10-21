@@ -2,6 +2,13 @@
 
 aiogram 3 asosidagi oddiy Telegram bot shablon.
 
+## Quick start
+
+```bash
+make run     # creates .venv and .env, installs deps, starts the app
+make test    # checks + tests
+```
+
 ## Imkoniyatlar
 
 - `/start` — salomlashish va asosiy menyu
