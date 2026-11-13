@@ -2,14 +2,16 @@ from aiogram import F, Router, html
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message
 
-from bot.keyboards import main_menu
+from bot.keyboards import BTN_ABOUT, BTN_HELP, main_menu
 
 router = Router()
 
 HELP_TEXT = (
     "Buyruqlar:\n"
     "/start - botni ishga tushirish\n"
-    "/help - yordam\n\n"
+    "/help - yordam\n"
+    "/feedback - baho berish (⭐)\n"
+    "/cancel - bekor qilish\n\n"
     "Istalgan matn yozsangiz, bot uni qaytaradi."
 )
 
@@ -21,12 +23,12 @@ async def start_handler(message: Message):
 
 
 @router.message(Command('help'))
-@router.message(F.text == "ℹ️ Yordam")
+@router.message(F.text == BTN_HELP)
 async def help_handler(message: Message):
     await message.answer(HELP_TEXT)
 
 
-@router.message(F.text == "👤 Men haqimda")
+@router.message(F.text == BTN_ABOUT)
 async def about_handler(message: Message):
     user = message.from_user
     username = f"@{user.username}" if user.username else "yo'q"

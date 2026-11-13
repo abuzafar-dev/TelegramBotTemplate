@@ -1,6 +1,7 @@
 from aiogram import Router
 
-from bot.handlers import echo, start
+from bot.handlers import echo, feedback, start
 
 router = Router()
-router.include_routers(start.router, echo.router)
+# Tartib muhim: feedback (FSM holatlari) echo dan oldin turishi kerak
+router.include_routers(feedback.router, start.router, echo.router)

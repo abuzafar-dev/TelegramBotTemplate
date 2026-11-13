@@ -14,6 +14,9 @@ make test    # checks + tests
 - `/start` — salomlashish va asosiy menyu
 - `/help` yoki "ℹ️ Yordam" tugmasi — yordam
 - "👤 Men haqimda" — foydalanuvchi ID, ismi va username
+- "⭐ Baho berish" yoki `/feedback` — **FSM** namunasi: 1–5 yulduz (★★★☆☆) → izoh → natija
+- Deep-link / QR: `https://t.me/<bot>?start=filial_3` → baho so'raladi, `filial_3` manba sifatida saqlanadi
+- `/cancel` — har qanday holatdan chiqish
 - Boshqa matnlarni qaytaradi (echo)
 
 ## Tuzilishi
@@ -21,8 +24,10 @@ make test    # checks + tests
 ```
 bot/
   config.py        .env dan token o'qish
-  keyboards.py     tugmalar
+  keyboards.py     tugmalar (reply + inline yulduzchalar)
+  states.py        FSM holatlari
   handlers/
+    feedback.py    baho FSM, deep-link /start, inline callback
     start.py       /start, /help, men haqimda
     echo.py        echo
 main.py            botni ishga tushirish
